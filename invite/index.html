@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TEON &amp; EVA — День рождения</title>
+<meta name="description" content="Приглашаем вас на день рождения TEON &amp; EVA!">
+<meta property="og:title" content="TEON &amp; EVA — День рождения">
+<meta property="og:description" content="Приглашаем вас на праздник 5 сентября 2026!">
+<meta property="og:type" content="website">
+<meta property="og:image" content="photos/share.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;500;600;700&family=Marck+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<button class="music-btn" id="music-btn" type="button" aria-label="Музыка">
+  <span class="music-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+<!-- Положи свой mp3-файл в папку music/ и назови его song.mp3 -->
+<audio id="bg-music" src="music/song.mp3" loop preload="auto"></audio>
+
+<div class="page">
+  <main class="card">
+
+    <header class="header reveal">
+      <div class="hero-photo">
+        <!-- Замени на фото детей: photos/hero.jpg -->
+        <img src="photos/hero.jpg" alt="TEON и EVA" onerror="this.parentElement.classList.add('ph-empty')">
+      </div>
+      <div class="hero-card">
+        <p class="hero-eyebrow">Приглашение на праздник</p>
+        <h1 class="hero-title" id="hero-title">TEON <span class="amp">&amp;</span> EVA</h1>
+        <!-- ⬇️ ЗАПОЛНИ ВОЗРАСТ здесь и в script.js (CONFIG.AGE_TEXT) -->
+        <p class="hero-script" id="hero-age">Заполните возраст</p>
+        <div class="hero-after">
+          <div class="hero-divider" aria-hidden="true">
+            <span class="hd-line"></span>
+            <svg class="hd-heart" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg"><path d="M16 27C4 18 2 11 7.5 7 11 4.3 15 7.5 16 9.4 17 7.5 21 4.3 24.5 7 30 11 28 18 16 27Z" fill="currentColor"/></svg>
+            <span class="hd-line"></span>
+          </div>
+          <p class="hero-date" id="hero-date">05.09.2026</p>
+          <p class="hero-closing">Будем очень рады разделить с вами этот особенный день!</p>
+          <button type="button" class="cta-rsvp" id="cta-rsvp">Подтвердить присутствие</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="message reveal">
+      <div class="photo-slot message-photo">
+        <div class="photo-ph" aria-hidden="true">🎈</div>
+        <img src="photos/message.jpg" alt="" loading="lazy" onerror="this.remove()">
+      </div>
+      <p class="message-text">Этот год пролетел совсем незаметно, наполнив нашу жизнь смехом, новыми словами и самыми тёплыми моментами. Хотим отметить этот день вместе с самыми родными людьми — будем очень рады видеть вас на празднике!</p>
+    </section>
+
+    <section class="date-block reveal">
+      <p class="date-month" id="date-month">Сентябрь</p>
+      <p class="date-day" id="date-day">5</p>
+      <p class="date-when" id="date-when"><span class="dw-year">2026</span><span class="dw-time">17:00</span></p>
+      <div class="calendar" aria-hidden="true">
+        <div class="cal-weekdays" id="cal-weekdays"></div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+    </section>
+
+    <section class="event reveal">
+      <div class="event-row">
+        <span class="event-icon" aria-hidden="true">📍</span>
+        <div class="event-text">
+          <span class="event-label">Место проведения</span>
+          <span class="event-value">PARADISE</span>
+          <span class="event-sub">경기도 화성시 행정서로 3길 13</span>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a class="map-btn" id="map-btn" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%99%94%EC%84%B1%EC%8B%9C%20%ED%96%89%EC%A0%95%EC%84%9C%EB%A1%9C%203%EA%B8%B8%2013" target="_blank" rel="noopener">Открыть в Naver Map</a>
+      </div>
+    </section>
+
+    <section class="rsvp reveal" id="rsvp-section">
+      <div class="rsvp-loading" id="rsvp-loading" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span>Загружаем ваше приглашение…</span>
+      </div>
+
+      <div class="rsvp-controls" id="rsvp-controls" hidden>
+        <p class="rsvp-already" id="rsvp-already" hidden></p>
+        <p class="rsvp-greeting" id="rsvp-greeting">Здравствуйте!</p>
+        <p class="rsvp-question">Сможете ли вы прийти?</p>
+        <div class="rsvp-buttons">
+          <button type="button" class="rsvp-btn rsvp-yes" data-value="yes">Да, мы придём</button>
+          <button type="button" class="rsvp-btn rsvp-no" data-value="no">К сожалению, не сможем</button>
+        </div>
+        <p class="field-error" id="rsvp-error" hidden>Что-то пошло не так. Попробуйте ещё раз.</p>
+      </div>
+
+      <p class="rsvp-note" id="rsvp-no-guest" hidden>Приглашение открыто без именной ссылки — используйте ссылку, которую вам прислали, чтобы подтвердить присутствие.</p>
+    </section>
+
+    <div class="confirmation" id="confirmation" hidden>
+      <div class="teddy-emoji" aria-hidden="true">🎉</div>
+      <h2>Спасибо!</h2>
+      <p id="confirmation-message"></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
