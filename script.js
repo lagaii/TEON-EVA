@@ -114,6 +114,27 @@ const CONFIG = {
 (function initMusic(){
   const btn = document.getElementById('music-btn');
   const audio = document.getElementById('bg-music');
+
+  function startMusic(){
+    audio.play().then(() => {
+      btn.classList.add('playing');
+    }).catch(() => {
+      // Браузер заблокировал автозапуск — подождём первого касания экрана
+    });
+  }
+
+  // Пробуем включить сразу при загрузке страницы
+  startMusic();
+
+  // Если браузер заблокировал — запускаем при самом первом клике/тапе где угодно на странице
+  function onFirstInteraction(){
+    if (audio.paused){ startMusic(); }
+    document.removeEventListener('click', onFirstInteraction);
+    document.removeEventListener('touchstart', onFirstInteraction);
+  }
+  document.addEventListener('click', onFirstInteraction, { once: true });
+  document.addEventListener('touchstart', onFirstInteraction, { once: true });
+
   btn.addEventListener('click', () => {
     if (audio.paused){
       audio.play().catch(() => {});
